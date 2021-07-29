@@ -8,7 +8,7 @@
 
 import React, { Component } from 'react';
 import type {Node} from 'react';
-import {
+import { //declare the data type
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -18,6 +18,7 @@ import {
   Button,
   useColorScheme,
   View,
+  TouchableOpacity,
 } from 'react-native';
 
 import {
@@ -32,9 +33,16 @@ import {
 
 const styles = StyleSheet.create({
   sectionContainer: {
-    flex: 1 ,
-    justifyContent: 'center',
-    padding: 20
+    flex: 1 
+  },
+  resultText:{
+    fontSize: 20 ,
+    color: 'black',
+    
+  },
+  calculationText:{
+    fontSize: 50,
+    color: 'black'
   },
   sectionTitle: {
     fontSize: 24,
@@ -48,6 +56,48 @@ const styles = StyleSheet.create({
   highlight: {
     fontWeight: '700',
   },
+  container: {
+    flex: 1
+  }, 
+  result: {
+    flex : 1 , 
+    backgroundColor: 'cyan',
+    justifyContent: 'center',
+    alignItems: 'flex-end'
+  },
+  calculation: {
+    flex: 1 ,
+    backgroundColor: 'yellow',
+    justifyContent: 'center',
+    alignItems: 'flex-end'
+  },
+  buttons: {
+    flex: 4 ,
+
+    flexDirection: 'row'
+  },
+  numbers:{
+    flex: 3,
+    backgroundColor: 'brown'
+  },
+  operations:{
+    flex: 1,
+    justifyContent: 'space-around',
+    backgroundColor: 'black'
+  },
+  row: {
+    flexDirection: "row",
+    flex: 1,
+    justifyContent: 'space-around',
+
+    alignItems: 'center'
+  }, 
+  btn:{
+    flex: 1,
+    alignItems: 'center',
+    alignSelf: 'stretch',
+    justifyContent: 'center'
+  }
 });
 
 export default class App extends Component {
@@ -78,23 +128,92 @@ export default class App extends Component {
   render(){
     return (
         <View style = {styles.sectionContainer}>
-            <Text>Username</Text>
-            <TextInput
-              defaultValue = {this.state.username}
-              onChangeText = {text => this.setState({username: text})} 
-            />
+            <View style = {styles.result}>
+                <Text style ={styles.resultText}>11*11</Text>
+            </View>
+            <View style = {styles.calculation}>
+                <Text style ={styles.calculationText}>121</Text>
+            </View>
+            <View style = {styles.buttons}>
+                <View style={styles.numbers}>
+                  <View style = {styles.row}>
+                      <TouchableOpacity style = {styles.btn}>
+                        <Text>0</Text>
+                      </TouchableOpacity>
 
-            <Text>Password</Text>
-            <TextInput
-              defaultValue = {this.state.password}
-              onChangeText = {text => this.setState({password: text})}   
-            />
+                      <TouchableOpacity style = {styles.btn}>
+                        <Text>0</Text>
+                      </TouchableOpacity>
 
-            <Button title={"Hello"} onPress={this.buttonPressed} />
-            
+                      <TouchableOpacity style = {styles.btn}>
+                        <Text>0</Text>
+                      </TouchableOpacity>
+                  
+                  </View>
+                      
+                  <View style = {styles.row}>
+                      <TouchableOpacity style = {styles.btn}>
+                        <Text>0</Text>
+                      </TouchableOpacity>
+
+                      <TouchableOpacity style = {styles.btn}>
+                        <Text>0</Text>
+                      </TouchableOpacity>
+                      
+                      <TouchableOpacity style = {styles.btn}>
+                        <Text>0</Text>
+                      </TouchableOpacity>
+                  </View>
+
+
+                  <View style = {styles.row}>
+                      <TouchableOpacity style = {styles.btn}>
+                        <Text>0</Text>
+                      </TouchableOpacity>
+
+                      <TouchableOpacity style = {styles.btn}>
+                        <Text>0</Text>
+                      </TouchableOpacity>
+                      
+                      <TouchableOpacity style = {styles.btn}>
+                        <Text>0</Text>
+                      </TouchableOpacity>
+                  </View>
+
+                  <View style = {styles.row}>
+                      <TouchableOpacity style = {styles.btn}>
+                        <Text>0</Text>
+                      </TouchableOpacity>
+
+                      <TouchableOpacity style = {styles.btn}>
+                        <Text>0</Text>
+                      </TouchableOpacity>
+                      
+                      <TouchableOpacity style = {styles.btn}>
+                        <Text>0</Text>
+                      </TouchableOpacity>
+
+                  </View>
+                </View>
+                <View style={styles.operations}>
+                      <TouchableOpacity style = {styles.btn}>
+                        <Text>0</Text>
+                      </TouchableOpacity>
+
+                      <TouchableOpacity style = {styles.btn}>
+                        <Text>0</Text>
+                      </TouchableOpacity>
+                      
+                      <TouchableOpacity style = {styles.btn}>
+                        <Text>0</Text>
+                      </TouchableOpacity>
+                </View>
+            </View>
         </View>
     );
   }
 }
+
+
 
 //export default App;
