@@ -139,15 +139,28 @@ export default class App extends Component {
 
   }
 
+  validate(){
+    const text = this.state.resultText 
+    switch(text.slice(-1)){
+      case '+':
+      case '-':
+      case '*':
+      case '/':
+        return false //avoid crash from some cases like 22+, 22-
+
+    }
+    return true 
+  }
+
   buttonPressed(text){
       console.log(text);
 
       if (text == '='){
-        return this.calculateResult()
+        return this.validate() && this.calculateResult()
       }
 
       this.setState({
-        resultText: this.state.resultText + text, 
+        resultText:   this.state.resultText + text, 
         
       })
   }
@@ -206,9 +219,11 @@ export default class App extends Component {
             <View style = {styles.result}>
                 <Text style ={styles.resultText}>{this.state.resultText}</Text>
             </View>
+
             <View style = {styles.calculation}>
                 <Text style ={styles.calculationText}>{this.state.calculationText}</Text>
             </View>
+
             <View style = {styles.buttons}>
                 <View style={styles.numbers}>
                  {rows}
