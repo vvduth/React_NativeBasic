@@ -97,14 +97,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'stretch',
     justifyContent: 'center'
-  }
+  },
+  btnText:{
+    fontSize: 30,
+  },
+  white: {
+    color: 'white', 
+    fontSize: 35
+  } 
 });
 
 export default class App extends Component {
   constructor(){
     super()
-    this.state = {}
-    this.buttonPressed = this.buttonPressed.bind(this)
+    this.state = {
+      resultText : " "
+    }
+    //this.buttonPressed = this.buttonPressed.bind(this)
   }
 
   handleUsernameChanges(newText){
@@ -115,98 +124,73 @@ export default class App extends Component {
     console.log(`Password is ${newText}`)
   }
 
-  buttonPressed(){
-    //TODO; get username and password
-    console.log(this.state.username, this.state.password)
-    //const username = this._username._lastNativeText
-    //const password = this._password._lastNativeText
-    //console.log(this._username, this._password)
 
+  calculateResult(){
+    const text = this.state.resultText
+    //now parse this text 3+3*6^5/2+7
   }
 
+  buttonPressed(text){
+      console.log(text);
+
+      if (text == '='){
+        return this.calculateResult()
+      }
+
+      this.setState({
+        resultText: this.state.resultText+text 
+      })
+  }
+
+  operate(operation){
+    switch(operation){
+      case 'DEL':
+        const text = this.state.resultText.split(''); 
+        text.pop()
+        text.join('')
+        this.setState({
+          resultText: text.join('')
+        })
+    }
+  }
 
   render(){
+    let rows = [];
+    let nums = [[1,2,3],[4,5,6],[7,8,9],['.',0,'=']]
+    for(let i = 0; i< 4; i++){
+      let row = []
+      
+      for (let j = 0;j < 3 ; j++){
+          row.push(<TouchableOpacity onPress={() => this.buttonPressed(nums[i][j])} style = {styles.btn}>
+                      <Text style = {styles.btnText}>{nums[i][j]}</Text>
+                </TouchableOpacity>)
+      }
+      rows.push(<View style ={styles.row}>{row}</View>)
+    }
+
+    let operations = ['DEL','+','-','*','/'];
+    let ops = [];
+    for (let i = 0 ; i < 5;i++){
+        ops.push(<TouchableOpacity style = {styles.btn} onPress={()=>this.operate(operations[i])}>
+          <Text style = {styles.btnText , styles.white}>{operations[i]}</Text>
+    </TouchableOpacity>)
+    }
+
+
     return (
         <View style = {styles.sectionContainer}>
             <View style = {styles.result}>
-                <Text style ={styles.resultText}>11*11</Text>
+                <Text style ={styles.resultText}>{this.state.resultText}</Text>
             </View>
             <View style = {styles.calculation}>
                 <Text style ={styles.calculationText}>121</Text>
             </View>
             <View style = {styles.buttons}>
                 <View style={styles.numbers}>
-                  <View style = {styles.row}>
-                      <TouchableOpacity style = {styles.btn}>
-                        <Text>0</Text>
-                      </TouchableOpacity>
-
-                      <TouchableOpacity style = {styles.btn}>
-                        <Text>0</Text>
-                      </TouchableOpacity>
-
-                      <TouchableOpacity style = {styles.btn}>
-                        <Text>0</Text>
-                      </TouchableOpacity>
-                  
-                  </View>
-                      
-                  <View style = {styles.row}>
-                      <TouchableOpacity style = {styles.btn}>
-                        <Text>0</Text>
-                      </TouchableOpacity>
-
-                      <TouchableOpacity style = {styles.btn}>
-                        <Text>0</Text>
-                      </TouchableOpacity>
-                      
-                      <TouchableOpacity style = {styles.btn}>
-                        <Text>0</Text>
-                      </TouchableOpacity>
-                  </View>
-
-
-                  <View style = {styles.row}>
-                      <TouchableOpacity style = {styles.btn}>
-                        <Text>0</Text>
-                      </TouchableOpacity>
-
-                      <TouchableOpacity style = {styles.btn}>
-                        <Text>0</Text>
-                      </TouchableOpacity>
-                      
-                      <TouchableOpacity style = {styles.btn}>
-                        <Text>0</Text>
-                      </TouchableOpacity>
-                  </View>
-
-                  <View style = {styles.row}>
-                      <TouchableOpacity style = {styles.btn}>
-                        <Text>0</Text>
-                      </TouchableOpacity>
-
-                      <TouchableOpacity style = {styles.btn}>
-                        <Text>0</Text>
-                      </TouchableOpacity>
-                      
-                      <TouchableOpacity style = {styles.btn}>
-                        <Text>0</Text>
-                      </TouchableOpacity>
-
-                  </View>
+                 {rows}
                 </View>
                 <View style={styles.operations}>
-                      <TouchableOpacity style = {styles.btn}>
-                        <Text>0</Text>
-                      </TouchableOpacity>
-
-                      <TouchableOpacity style = {styles.btn}>
-                        <Text>0</Text>
-                      </TouchableOpacity>
-                      
-                      <TouchableOpacity style = {styles.btn}>
-                        <Text>0</Text>
-                      </TouchableOpacity>
+                      {ops}
                 </View>
             </View>
         </View>
