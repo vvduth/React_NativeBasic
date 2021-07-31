@@ -111,9 +111,11 @@ export default class App extends Component {
   constructor(){
     super()
     this.state = {
-      resultText : " "
+      resultText : " ",
+      calculationText : " "
     }
     //this.buttonPressed = this.buttonPressed.bind(this)
+    this.operations = ['DEL','+','-','*','/'];
   }
 
   handleUsernameChanges(newText){
@@ -126,8 +128,15 @@ export default class App extends Component {
 
 
   calculateResult(){
-    const text = this.state.resultText
-    //now parse this text 3+3*6^5/2+7
+    const text = this.state.resultText 
+    //now parse this text 3+3*6^5/2+7 to an array
+    //brackets --> of --> division --> mul --> add/minus
+    //eval(text)
+    this.setState({
+      calculationText: eval(text)
+      
+    })
+
   }
 
   buttonPressed(text){
@@ -138,7 +147,8 @@ export default class App extends Component {
       }
 
       this.setState({
-        resultText: this.state.resultText+text 
+        resultText: this.state.resultText + text, 
+        
       })
   }
 
@@ -150,6 +160,20 @@ export default class App extends Component {
         text.join('')
         this.setState({
           resultText: text.join('')
+        })
+        break
+      
+      case '+':
+      case '-':
+      case '*':
+      case '/':
+        const lastChar = this.state.resultText.split('').pop()
+
+        if (this.operations.indexOf(lastChar) > 0) return  // if last character is an operation and user continue to press another ope, return nothing
+
+        if (this.state.text == "" ) return 
+        this.setState ({
+          resultText: this.state.resultText + operation 
         })
     }
   }
@@ -168,11 +192,11 @@ export default class App extends Component {
       rows.push(<View style ={styles.row}>{row}</View>)
     }
 
-    let operations = ['DEL','+','-','*','/'];
+    
     let ops = [];
     for (let i = 0 ; i < 5;i++){
-        ops.push(<TouchableOpacity style = {styles.btn} onPress={()=>this.operate(operations[i])}>
-          <Text style = {styles.btnText , styles.white}>{operations[i]}</Text>
+        ops.push(<TouchableOpacity style = {styles.btn} onPress={()=>this.operate(this.operations[i])}>
+          <Text style = {styles.btnText , styles.white}>{this.operations[i]}</Text>
     </TouchableOpacity>)
     }
 
@@ -183,7 +207,7 @@ export default class App extends Component {
                 <Text style ={styles.resultText}>{this.state.resultText}</Text>
             </View>
             <View style = {styles.calculation}>
-                <Text style ={styles.calculationText}>121</Text>
+                <Text style ={styles.calculationText}>{this.state.calculationText}</Text>
             </View>
             <View style = {styles.buttons}>
                 <View style={styles.numbers}>
