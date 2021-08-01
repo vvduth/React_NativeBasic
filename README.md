@@ -12,8 +12,10 @@
 
 
 ## Some pictures of the app
- 
-<img src="https://github.com/vvduth/React_NativeBasic/blob/master/calculator1.png />
 
-<img src="https://github.com/vvduth/React_NativeBasic/blob/master/calculator2.png />
+-Before I edit the colors 
+<img src="https://github.com/vvduth/React_NativeBasic/blob/master/calculator1.png" />
+
+-After I edit the colors
+<img src="https://github.com/vvduth/React_NativeBasic/blob/master/calculator2.png" />
 
