@@ -36,13 +36,13 @@ const styles = StyleSheet.create({
     flex: 1 
   },
   resultText:{
-    fontSize: 20 ,
-    color: 'black',
+    fontSize: 30 ,
+    color: 'white',
     
   },
   calculationText:{
     fontSize: 50,
-    color: 'black'
+    color: 'white'
   },
   sectionTitle: {
     fontSize: 24,
@@ -61,15 +61,16 @@ const styles = StyleSheet.create({
   }, 
   result: {
     flex : 1 , 
-    backgroundColor: 'cyan',
+    backgroundColor: '#505050',
     justifyContent: 'center',
     alignItems: 'flex-end'
   },
   calculation: {
     flex: 1 ,
-    backgroundColor: 'yellow',
+    backgroundColor: '#1C1C1C',
     justifyContent: 'center',
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
+    color: 'white'
   },
   buttons: {
     flex: 4 ,
@@ -78,12 +79,13 @@ const styles = StyleSheet.create({
   },
   numbers:{
     flex: 3,
-    backgroundColor: 'brown'
+    backgroundColor: '#D4D4D2',
+    
   },
   operations:{
     flex: 1,
     justifyContent: 'space-around',
-    backgroundColor: 'black'
+    backgroundColor: '#FF9500'
   },
   row: {
     flexDirection: "row",
@@ -96,10 +98,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     alignSelf: 'stretch',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderWidth: 1,
   },
   btnText:{
     fontSize: 30,
+   
+    
   },
   white: {
     color: 'white', 
@@ -133,7 +138,7 @@ export default class App extends Component {
     //brackets --> of --> division --> mul --> add/minus
     //eval(text)
     this.setState({
-      calculationText: eval(text)
+      calculationText: eval(text),
       
     })
 
@@ -156,6 +161,7 @@ export default class App extends Component {
       console.log(text);
 
       if (text == '='){
+       
         return this.validate() && this.calculateResult()
       }
 
@@ -181,7 +187,7 @@ export default class App extends Component {
       case '*':
       case '/':
         const lastChar = this.state.resultText.split('').pop()
-
+        console.log(lastChar)
         if (this.operations.indexOf(lastChar) > 0) return  // if last character is an operation and user continue to press another ope, return nothing
 
         if (this.state.text == "" ) return 
